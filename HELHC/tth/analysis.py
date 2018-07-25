@@ -15,15 +15,15 @@ sys.path.append('/afs/cern.ch/work/h/helsens/public/FCCDicts/')
 # pre-produced input files
 comp = cfg.Component(
     'example',
-     files = ["root://eospublic.cern.ch////eos/experiment/fcc/helhc/generation/DelphesEvents/helhc_v01/mgp8_pp_tth0123j_hbb_5f/events_001140744.root"]
+     files = ["root://eospublic.cern.ch/////eos/experiment/fcc/helhc/generation/DelphesEvents/helhc_v01/mgp8_pp_tth0123j_5f_hbb/events_000838653.root"]
 )
 
 from heppySampleList_fcc_v01 import *
 
-selectedComponents = [
-    pp_ll012j_5f,
-    pp_tth01j_5f_hmumu,
-                       ]
+#selectedComponents = [
+#    pp_ll012j_5f,
+#    pp_tth01j_5f_hmumu,
+#                       ]
 
 
 
