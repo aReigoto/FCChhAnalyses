@@ -117,7 +117,7 @@ gen_bs = cfg.Analyzer(
 )
 
 # produce flat root tree containing information about stable leptons in the event
-from heppy.FCChhAnalyses.HELHC.hh_boosted.GenTreeProducer import GenTreeProducer
+from heppy.FCChhAnalyses.HELHC.tth.GenTreeProducer import GenTreeProducer
 gen_tree = cfg.Analyzer(
     GenTreeProducer,
     gen_higgses = 'gen_higgses',
