@@ -12,22 +12,22 @@ sample=imp.load_source('heppylist', '/afs/cern.ch/work/h/helsens/public/FCCDicts
 
 comp = cfg.Component(
     'example',
-     files = [""]
+     files = ["/eos/experiment/fcc/helhc/generation/DelphesEvents/helhc_v01/mgp8_pp_tth0123j_5f_hbb/events_000838653.root"]
 )
 
-selectedComponents = [ # from 100 TeV
-                       sample.mgp8_pp_tth01j_5f_hbb,
-                       sample.mgp8_pp_ttj_4f,
-                       sample.mgp8_pp_ttbb_4f,
-                       sample.mgp8_pp_ttz_5f,
-                     ]
+#selectedComponents = [ # from 100 TeV
+#                       sample.mgp8_pp_tth01j_5f_hbb,
+#                       sample.mgp8_pp_ttj_4f,
+#                       sample.mgp8_pp_ttbb_4f,
+#                       sample.mgp8_pp_ttz_5f,
+#                     ]
+#
+#sample.mgp8_pp_tth01j_5f_hbb.splitFactor = 60
+#sample.mgp8_pp_ttj_4f.splitFactor = 150
+#sample.mgp8_pp_ttbb_4f.splitFactor = 70
+#sample.mgp8_pp_ttz_5f.splitFactor = 150
 
-sample.mgp8_pp_tth01j_5f_hbb.splitFactor = 60
-sample.mgp8_pp_ttj_4f.splitFactor = 150
-sample.mgp8_pp_ttbb_4f.splitFactor = 70
-sample.mgp8_pp_ttz_5f.splitFactor = 150
-
-#selectedComponents = [comp]
+selectedComponents = [comp]
 
 
 from heppy.FCChhAnalyses.analyzers.Reader import Reader
@@ -37,7 +37,7 @@ source = cfg.Analyzer(
     weights = 'mcEventWeights',
 
     gen_particles = 'skimmedGenParticles',
-    
+
     muons = 'muons',
     muonITags = 'muonITags',
     muonsToMC = 'muonsToMC',
@@ -49,31 +49,31 @@ source = cfg.Analyzer(
     jets = 'pfjets04',
     bTags = 'pfbTags04',
     jetsFlavor  = 'pfjetsFlavor04',
- 
+
     photons = 'photons',
-    
+
     pfphotons = 'pfphotons',
     pfcharged = 'pfcharged',
     pfneutrals = 'pfneutrals',
 
     met = 'met',
-   
-    
+
+
     pfjets15 = 'pfjets15',
-    pfjetsOneSubJettiness15 = 'pfjetsOneSubJettiness15', 
-    pfjetsTwoSubJettiness15 = 'pfjetsTwoSubJettiness15', 
-    pfjetsThreeSubJettiness15 = 'pfjetsThreeSubJettiness15', 
-    pfsubjetsSoftDropTagged15 = 'pfsubjetsSoftDropTagged15', 
+    pfjetsOneSubJettiness15 = 'pfjetsOneSubJettiness15',
+    pfjetsTwoSubJettiness15 = 'pfjetsTwoSubJettiness15',
+    pfjetsThreeSubJettiness15 = 'pfjetsThreeSubJettiness15',
+    pfsubjetsSoftDropTagged15 = 'pfsubjetsSoftDropTagged15',
     pfsubjetsSoftDrop15 = 'pfsubjetsSoftDrop15',
-    pfjetConst15 = 'pfjetConst15',    
-    
+    pfjetConst15 = 'pfjetConst15',
+
     #pfjets08 = 'pfjets08',
-    #pfjetsOneSubJettiness08 = 'pfjetsOneSubJettiness08', 
-    #pfjetsTwoSubJettiness08 = 'pfjetsTwoSubJettiness08', 
-    #pfjetsThreeSubJettiness08 = 'pfjetsThreeSubJettiness08', 
-    #pfsubjetsSoftDropTagged08 = 'pfsubjetsSoftDropTagged08', 
-    #pfsubjetsSoftDrop08 = 'pfsubjetsSoftDrop08', 
-    
+    #pfjetsOneSubJettiness08 = 'pfjetsOneSubJettiness08',
+    #pfjetsTwoSubJettiness08 = 'pfjetsTwoSubJettiness08',
+    #pfjetsThreeSubJettiness08 = 'pfjetsThreeSubJettiness08',
+    #pfsubjetsSoftDropTagged08 = 'pfsubjetsSoftDropTagged08',
+    #pfsubjetsSoftDrop08 = 'pfsubjetsSoftDrop08',
+
 
 
 )
@@ -150,7 +150,7 @@ selected_electrons = cfg.Analyzer(
 from heppy.analyzers.Merger import Merger
 selected_leptons = cfg.Analyzer(
       Merger,
-      instance_label = 'selected_leptons', 
+      instance_label = 'selected_leptons',
       inputs = ['selected_electrons','selected_muons'],
       output = 'selected_leptons'
 )
