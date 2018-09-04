@@ -67,7 +67,7 @@ class SimpleTreeProducer(Analyzer):
 
         '''
         #self.tree.fill('weight' , sign(event.weight) )
-        self.tree.fill('weight', sign(event.weight))
+        self.tree.fill('weight', event.weight)
         self.tree.fill('electrons', event.input.electrons)
         self.tree.tree.Fill()
 
