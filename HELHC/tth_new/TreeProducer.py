@@ -44,8 +44,9 @@ class SimpleTreeProducer(Analyzer):
         self.rootfile = TFile('/'.join([self.dirName,
                                         'simple_tree.root']),
                               'recreate')
-        self.tree = Tree(self.cfg_ana.tree_name,
-                         self.cfg_ana.tree_title)
+        # self.tree = Tree(self.cfg_ana.tree_name,
+        #                 self.cfg_ana.tree_title)
+        self.tree = Tree('events', '')
         self.tree.var('mcEventWeights')
         self.tree.var('electrons')
 
