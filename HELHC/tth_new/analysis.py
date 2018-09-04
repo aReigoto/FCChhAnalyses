@@ -19,7 +19,8 @@ comp = cfg.Component(
 
 selectedComponents = [comp]
 
-from EventStore import EventStore as Events
+# use a simple event reader based on the ROOT TChain class
+from heppy.framework.chain import Chain as Events
 
 
 from heppy.FCChhAnalyses.HELHC.tth_new.TreeProducer import SimpleTreeProducer
