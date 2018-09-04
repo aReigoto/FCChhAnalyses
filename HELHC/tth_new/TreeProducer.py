@@ -47,7 +47,10 @@ class SimpleTreeProducer(Analyzer):
         # self.tree = Tree(self.cfg_ana.tree_name,
         #                 self.cfg_ana.tree_title)
         self.tree = Tree('events', '')
-        self.tree.var('mcEventWeights')
+        # Names of vars must be availebel from
+        # from EventStore import EventStore as Events
+        # EventStore
+        self.tree.var('weights')
         self.tree.var('electrons')
 
     def process(self, event):
