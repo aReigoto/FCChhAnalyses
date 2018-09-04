@@ -19,8 +19,40 @@ comp = cfg.Component(
 
 selectedComponents = [comp]
 
-# use a simple event reader based on the ROOT TChain class
-from heppy.framework.chain import Chain as Events
+### FCChhAnalyses specific
+from heppy.FCChhAnalyses.analyzers.Reader import Reader
+source = cfg.Analyzer(
+    Reader,
+
+    weights = 'mcEventWeights',
+
+    gen_particles = 'skimmedGenParticles',
+
+    electrons = 'electrons',
+    electronITags = 'electronITags',
+    electronsToMC = 'electronsToMC',
+
+    muons = 'muons',
+    muonITags = 'muonITags',
+    muonsToMC = 'muonsToMC',
+
+    jets = 'pfjets04',
+    bTags = 'pfbTags04',
+
+    photons = 'photons',
+
+    pfphotons = 'pfphotons',
+    pfcharged = 'pfcharged',
+    pfneutrals = 'pfneutrals',
+
+    met = 'met',
+
+)
+
+from ROOT import gSystem
+gSystem.Load("libdatamodelDict")
+from EventStore import EventStore as Events
+### FCChhAnalyses specific
 
 
 from heppy.FCChhAnalyses.HELHC.tth_new.TreeProducer import SimpleTreeProducer
