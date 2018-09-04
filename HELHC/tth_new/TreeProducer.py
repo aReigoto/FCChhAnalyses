@@ -46,8 +46,8 @@ class SimpleTreeProducer(Analyzer):
                               'recreate')
         self.tree = Tree(self.cfg_ana.tree_name,
                          self.cfg_ana.tree_title)
-        self.tree.var('test_variable')
-        self.tree.var('test_variable_random')
+        self.tree.var('mcEventWeights')
+        self.tree.var('electrons')
 
     def process(self, event):
         '''Process the event.
@@ -60,8 +60,8 @@ class SimpleTreeProducer(Analyzer):
          has processed the event.
 
         '''
-        self.tree.fill('test_variable', event.input.var1)
-        self.tree.fill('test_variable_random', event.var_random)
+        self.tree.fill('mcEventWeights', event.input.mcEventWeights)
+        self.tree.fill('electrons', event.input.electrons)
         self.tree.tree.Fill()
 
     def write(self, setup):

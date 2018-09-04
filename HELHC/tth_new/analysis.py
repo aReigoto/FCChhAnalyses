@@ -16,3 +16,34 @@ comp = cfg.Component(
     'example',
     files=["/eos/experiment/fcc/helhc/generation/DelphesEvents/helhc_v01/mgp8_pp_tth0123j_5f_hbb/events_000838653.root"]
 )
+
+from heppy.FCChhAnalyses.HELHC.tth_new.TreeProducer import SimpleTreeProducer
+tree = cfg.Analyzer(
+    SimpleTreeProducer,
+    tree_name='events',
+    tree_title='A simple test tree'
+)
+
+sequence = cfg.Sequence([
+    tree
+])
+
+"""
+
+from heppy.framework.services.tfile import TFileService
+output_rootfile = cfg.Service(
+    TFileService,
+    'myhists',
+    fname='histograms.root',
+    option='recreate'
+)
+
+services = [output_rootfile]
+
+# finalization of the configuration object.
+config = cfg.Config( components = selectedComponents,
+                     sequence = sequence,
+                     services = services,
+                     events_class = Events )
+
+"""
