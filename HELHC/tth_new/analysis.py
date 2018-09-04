@@ -17,6 +17,11 @@ comp = cfg.Component(
     files=["/eos/experiment/fcc/helhc/generation/DelphesEvents/helhc_v01/mgp8_pp_tth0123j_5f_hbb/events_000838653.root"]
 )
 
+selectedComponents = [comp]
+
+from EventStore import EventStore as Events
+
+
 from heppy.FCChhAnalyses.HELHC.tth_new.TreeProducer import SimpleTreeProducer
 tree = cfg.Analyzer(
     SimpleTreeProducer,
@@ -27,6 +32,14 @@ tree = cfg.Analyzer(
 sequence = cfg.Sequence([
     tree
 ])
+
+
+# finalization of the configuration object.
+config = cfg.Config(components=selectedComponents,
+                    sequence=sequence,
+                    services=[],
+                    events_class=Events)
+
 
 """
 
