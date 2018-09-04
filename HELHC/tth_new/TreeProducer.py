@@ -50,7 +50,9 @@ class SimpleTreeProducer(Analyzer):
         # Names of vars must be availebel from
         # from EventStore import EventStore as Events
         # EventStore
-        self.tree.var('weights')
+        #self.tree = Tree( 'events', '')
+        self.tree.var('weight', float)
+        # self.tree.var('weights')
         self.tree.var('electrons')
 
     def process(self, event):
@@ -64,7 +66,8 @@ class SimpleTreeProducer(Analyzer):
          has processed the event.
 
         '''
-        self.tree.fill('weights', event.weight)
+        #self.tree.fill('weight' , sign(event.weight) )
+        self.tree.fill('weight', sign(event.weight))
         self.tree.fill('electrons', event.input.electrons)
         self.tree.tree.Fill()
 

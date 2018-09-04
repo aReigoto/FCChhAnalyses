@@ -44,7 +44,7 @@ stopper = cfg.Analyzer(
 from heppy.FCChhAnalyses.HELHC.tth.TreeProducer import SimpleTreeProducer
 tree = cfg.Analyzer(
     SimpleTreeProducer,
-    tree_name='tree',
+    tree_name='events',
     tree_title='A test tree'
 )
 
