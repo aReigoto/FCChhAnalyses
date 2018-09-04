@@ -64,7 +64,7 @@ class SimpleTreeProducer(Analyzer):
          has processed the event.
 
         '''
-        self.tree.fill('mcEventWeights', event.input.mcEventWeights)
+        self.tree.fill('weights', event.input.mcEventWeights)
         self.tree.fill('electrons', event.input.electrons)
         self.tree.tree.Fill()
 
