@@ -44,16 +44,16 @@ class SimpleTreeProducer(Analyzer):
         self.rootfile = TFile('/'.join([self.dirName,
                                         'simple_tree.root']),
                               'recreate')
-        # self.tree = Tree(self.cfg_ana.tree_name,
-        #                 self.cfg_ana.tree_title)
-        self.tree = Tree('events', '')
+        self.tree = Tree(self.cfg_ana.tree_name,
+                        self.cfg_ana.tree_title)
+        #self.tree = Tree('events', '')
         # Names of vars must be availebel from
         # from EventStore import EventStore as Events
         # EventStore
-        #self.tree = Tree( 'events', '')
-        self.tree.var('weight', float)
-        # self.tree.var('weights')
-        self.tree.var('electrons')
+        self.tree.var('weights', float)
+        bookLepton(self.tree, 'electrons', pflow=False)
+        bookParticle(self.tree, 'muons')
+
 
     def process(self, event):
         '''Process the event.
@@ -66,11 +66,44 @@ class SimpleTreeProducer(Analyzer):
          has processed the event.
 
         '''
-        #self.tree.fill('weight' , sign(event.weight) )
-        self.tree.fill('weight', event.weight)
+
+        #weights = getattr(event, self.cfg_ana.weights)
+        electrons = getattr(event, self.cfg_ana.electrons)
+        muons = getattr(event, self.cfg_ana.muons)
+
+        # self.tree.fill('weight' , sign(event.weight) )
         self.tree.fill('electrons', event.input.electrons)
+        self.tree.tree.Fill()
+
+        if len(electrons) > 0:
+            fillLepton(self.tree, 'electrons', electrons[0].legs[0])
+
+        if len(muons) > 0:
+            fillParticle(self.tree, 'muons', muons[0])
+
         self.tree.tree.Fill()
 
     def write(self, setup):
         self.rootfile.Write()
         self.rootfile.Close()
+
+
+"""
+tree_name
+tree_title
+weights
+gen_particles
+electrons
+electronITags
+electronsToMC
+muons
+muonITags
+muonsToMC
+jets
+bTags
+photons
+pfphotons
+pfcharged
+pfneutrals
+met
+"""

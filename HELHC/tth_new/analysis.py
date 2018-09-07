@@ -19,47 +19,62 @@ comp = cfg.Component(
 
 selectedComponents = [comp]
 
-### FCChhAnalyses specific
+# FCChhAnalyses specific
 from heppy.FCChhAnalyses.analyzers.Reader import Reader
 source = cfg.Analyzer(
     Reader,
 
-    weights = 'mcEventWeights',
+    weights='mcEventWeights',
 
-    gen_particles = 'skimmedGenParticles',
+    gen_particles='skimmedGenParticles',
 
-    electrons = 'electrons',
-    electronITags = 'electronITags',
-    electronsToMC = 'electronsToMC',
+    electrons='electrons',
+    electronITags='electronITags',
+    electronsToMC='electronsToMC',
 
-    muons = 'muons',
-    muonITags = 'muonITags',
-    muonsToMC = 'muonsToMC',
+    muons='muons',
+    muonITags='muonITags',
+    muonsToMC='muonsToMC',
 
-    jets = 'pfjets04',
-    bTags = 'pfbTags04',
+    jets='pfjets04',
+    bTags='pfbTags04',
 
-    photons = 'photons',
+    photons='photons',
 
-    pfphotons = 'pfphotons',
-    pfcharged = 'pfcharged',
-    pfneutrals = 'pfneutrals',
+    pfphotons='pfphotons',
+    pfcharged='pfcharged',
+    pfneutrals='pfneutrals',
 
-    met = 'met',
+    met='met',
 
 )
 
 from ROOT import gSystem
 gSystem.Load("libdatamodelDict")
 from EventStore import EventStore as Events
-### FCChhAnalyses specific
+# FCChhAnalyses specific
 
 
 from heppy.FCChhAnalyses.HELHC.tth_new.TreeProducer import SimpleTreeProducer
 tree = cfg.Analyzer(
     SimpleTreeProducer,
     tree_name='events',
-    tree_title='A simple test tree'
+    tree_title='A simple test tree',
+    weights='mcEventWeights',
+    gen_particles='skimmedGenParticles',
+    electrons='electrons',
+    electronITags='electronITags',
+    electronsToMC='electronsToMC',
+    muons='muons',
+    muonITags='muonITags',
+    muonsToMC='muonsToMC',
+    jets='pfjets04',
+    bTags='pfbTags04',
+    photons='photons',
+    pfphotons='pfphotons',
+    pfcharged='pfcharged',
+    pfneutrals='pfneutrals',
+    met='met'
 )
 
 sequence = cfg.Sequence([
