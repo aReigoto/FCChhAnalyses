@@ -71,10 +71,6 @@ class SimpleTreeProducer(Analyzer):
         electrons = getattr(event, self.cfg_ana.electrons)
         muons = getattr(event, self.cfg_ana.muons)
 
-        # self.tree.fill('weight' , sign(event.weight) )
-        self.tree.fill('electrons', event.input.electrons)
-        self.tree.tree.Fill()
-
         if len(electrons) > 0:
             fillLepton(self.tree, 'electrons', electrons[0].legs[0])
 
