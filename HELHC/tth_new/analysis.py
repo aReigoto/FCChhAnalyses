@@ -54,30 +54,56 @@ gSystem.Load("libdatamodelDict")
 from EventStore import EventStore as Events
 # FCChhAnalyses specific
 
+# select isolated muons with pT > 50 GeV and relIso < 0.4
+from heppy.analyzers.Selector import Selector
+selected_muons = cfg.Analyzer(
+    Selector,
+    'selected_muons',
+    output='selected_muons',
+    input_objects='muons',
+    filter_func=lambda ptc: ptc.pt() > 50 and ptc.iso.sumpt / ptc.pt() < 0.4
+    #filter_func = lambda ptc: ptc.pt()>5
+
+)
+
+# select electrons with pT > 50 GeV and relIso < 0.4
+selected_electrons = cfg.Analyzer(
+    Selector,
+    'selected_electrons',
+    output='selected_electrons',
+    input_objects='electrons',
+    filter_func=lambda ptc: ptc.pt() > 50 and ptc.iso.sumpt / ptc.pt() < 0.4
+    #filter_func = lambda ptc: ptc.pt()>5
+
+)
+
 
 from heppy.FCChhAnalyses.HELHC.tth_new.TreeProducer import SimpleTreeProducer
 tree = cfg.Analyzer(
     SimpleTreeProducer,
     tree_name='events',
     tree_title='A simple test tree',
-    weights='mcEventWeights',
-    gen_particles='skimmedGenParticles',
-    electrons='electrons',
-    electronITags='electronITags',
-    electronsToMC='electronsToMC',
-    muons='muons',
-    muonITags='muonITags',
-    muonsToMC='muonsToMC',
-    jets='pfjets04',
-    bTags='pfbTags04',
-    photons='photons',
-    pfphotons='pfphotons',
-    pfcharged='pfcharged',
-    pfneutrals='pfneutrals',
-    met='met'
+    electrons='selected_electrons',
+    muons='selected_muons'
+    # weights='mcEventWeights',
+    # gen_particles='skimmedGenParticles',
+    # electronITags='electronITags',
+    # electronsToMC='electronsToMC',
+    # muonITags='muonITags',
+    # muonsToMC='muonsToMC',
+    # jets='pfjets04',
+    # bTags='pfbTags04',
+    # photons='photons',
+    # pfphotons='pfphotons',
+    # pfcharged='pfcharged',
+    # pfneutrals='pfneutrals',
+    # met='met'
 )
 
 sequence = cfg.Sequence([
+    source,
+    selected_muons,
+    selected_electrons,
     tree
 ])
 
