@@ -1,7 +1,8 @@
-
 from heppy.framework.analyzer import Analyzer
 from heppy.statistics.tree import Tree
-from ROOT import TFile
+from heppy.analyzers.ntuple import *
+from numpy import sign
+from ROOT import TFile, TLorentzVector
 
 
 class SimpleTreeProducer(Analyzer):
@@ -45,7 +46,7 @@ class SimpleTreeProducer(Analyzer):
                                         'simple_tree.root']),
                               'recreate')
         self.tree = Tree(self.cfg_ana.tree_name,
-                        self.cfg_ana.tree_title)
+                         self.cfg_ana.tree_title)
         #self.tree = Tree('events', '')
         # Names of vars must be availebel from
         # from EventStore import EventStore as Events
@@ -53,7 +54,6 @@ class SimpleTreeProducer(Analyzer):
         self.tree.var('weights', float)
         bookLepton(self.tree, 'electrons', pflow=False)
         bookParticle(self.tree, 'muons')
-
 
     def process(self, event):
         '''Process the event.
