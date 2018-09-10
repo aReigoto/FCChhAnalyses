@@ -80,7 +80,7 @@ class SimpleTreeProducer(Analyzer):
             fillParticle(self.tree, 'muons', muons)
 
         if len(jets) > 0:
-            fillParticle(self.tree, 'jets', jets)
+            fillParticle(self.tree, 'jets', jets[0])
 
         self.tree.tree.Fill()
 
