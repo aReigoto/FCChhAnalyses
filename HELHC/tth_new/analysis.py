@@ -81,7 +81,7 @@ tree = cfg.Analyzer(
 
     electrons='electrons',
     muons='muons',
-    jets='jets'
+    jets='jets',
 
     # weights='mcEventWeights',
     # gen_particles='skimmedGenParticles',
@@ -95,7 +95,7 @@ tree = cfg.Analyzer(
     # pfphotons='pfphotons',
     # pfcharged='pfcharged',
     # pfneutrals='pfneutrals',
-    # met='met'
+    met='met'
 )
 
 sequence = cfg.Sequence([

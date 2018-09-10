@@ -55,6 +55,7 @@ class SimpleTreeProducer(Analyzer):
         bookLepton(self.tree, 'electrons', pflow=False)
         bookParticle(self.tree, 'muons')
         bookParticle(self.tree, 'jets')
+        bookMet(self.tree, 'met')
 
     def process(self, event):
         '''Process the event.
