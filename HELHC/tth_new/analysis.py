@@ -106,8 +106,8 @@ tree = cfg.Analyzer(
 
 sequence = cfg.Sequence([
     source,
-    selected_muons,
-    selected_electrons,
+    #selected_muons,
+    #selected_electrons,
     tree
 ])
 
