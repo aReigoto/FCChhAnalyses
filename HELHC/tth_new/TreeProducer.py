@@ -75,7 +75,7 @@ class SimpleTreeProducer(Analyzer):
             fillLepton(self.tree, 'electrons', electrons[0].legs[0])
 
         if len(muons) > 0:
-            fillParticle(self.tree, 'muons', muons[0])
+            fillParticle(self.tree, 'muons', muons)
 
         self.tree.tree.Fill()
 
