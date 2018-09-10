@@ -27,18 +27,14 @@ source = cfg.Analyzer(
     weights='mcEventWeights',
 
     gen_particles='skimmedGenParticles',
-
     electrons='electrons',
     electronITags='electronITags',
     electronsToMC='electronsToMC',
-
     muons='muons',
     muonITags='muonITags',
     muonsToMC='muonsToMC',
-
     jets='pfjets04',
     bTags='pfbTags04',
-
     photons='photons',
 
     pfphotons='pfphotons',
@@ -62,8 +58,6 @@ selected_muons = cfg.Analyzer(
     output='selected_muons',
     input_objects='muons',
     filter_func=lambda ptc: ptc.pt() > 50 and ptc.iso.sumpt / ptc.pt() < 0.4
-    #filter_func = lambda ptc: ptc.pt()>5
-
 )
 
 # select electrons with pT > 50 GeV and relIso < 0.4
@@ -74,7 +68,6 @@ selected_electrons = cfg.Analyzer(
     input_objects='electrons',
     filter_func=lambda ptc: ptc.pt() > 50 and ptc.iso.sumpt / ptc.pt() < 0.4
     #filter_func = lambda ptc: ptc.pt()>5
-
 )
 
 
@@ -87,7 +80,8 @@ tree = cfg.Analyzer(
     # muons='selected_muons'
 
     electrons='electrons',
-    muons='muons'
+    muons='muons',
+    jets='jets'
 
     # weights='mcEventWeights',
     # gen_particles='skimmedGenParticles',
@@ -106,8 +100,8 @@ tree = cfg.Analyzer(
 
 sequence = cfg.Sequence([
     source,
-    #selected_muons,
-    #selected_electrons,
+    # selected_muons,
+    # selected_electrons,
     tree
 ])
 
@@ -117,24 +111,3 @@ config = cfg.Config(components=selectedComponents,
                     sequence=sequence,
                     services=[],
                     events_class=Events)
-
-
-"""
-
-from heppy.framework.services.tfile import TFileService
-output_rootfile = cfg.Service(
-    TFileService,
-    'myhists',
-    fname='histograms.root',
-    option='recreate'
-)
-
-services = [output_rootfile]
-
-# finalization of the configuration object.
-config = cfg.Config( components = selectedComponents,
-                     sequence = sequence,
-                     services = services,
-                     events_class = Events )
-
-"""

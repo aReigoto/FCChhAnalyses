@@ -54,6 +54,7 @@ class SimpleTreeProducer(Analyzer):
         self.tree.var('weights', float)
         bookLepton(self.tree, 'electrons', pflow=False)
         bookParticle(self.tree, 'muons')
+        bookParticle(self.tree, 'jets')
 
     def process(self, event):
         '''Process the event.
@@ -70,12 +71,16 @@ class SimpleTreeProducer(Analyzer):
         #weights = getattr(event, self.cfg_ana.weights)
         electrons = getattr(event, self.cfg_ana.electrons)
         muons = getattr(event, self.cfg_ana.muons)
+        jets = getattr(event, self.cfg_ana.jets)
 
         if len(electrons) > 0:
-            fillLepton(self.tree, 'electrons', electrons[0].legs[0])
+            fillLepton(self.tree, 'electrons', electrons)
 
         if len(muons) > 0:
             fillParticle(self.tree, 'muons', muons)
+
+        if len(jets) > 0:
+            fillParticle(self.tree, 'jets', jets)
 
         self.tree.tree.Fill()
 
