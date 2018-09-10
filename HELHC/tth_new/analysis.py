@@ -83,8 +83,12 @@ tree = cfg.Analyzer(
     SimpleTreeProducer,
     tree_name='events',
     tree_title='A simple test tree',
-    electrons='selected_electrons',
-    muons='selected_muons'
+    # electrons='selected_electrons',
+    # muons='selected_muons'
+
+    electrons='electrons',
+    muons='muons'
+
     # weights='mcEventWeights',
     # gen_particles='skimmedGenParticles',
     # electronITags='electronITags',
