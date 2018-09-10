@@ -74,6 +74,9 @@ class SimpleTreeProducer(Analyzer):
         muons = getattr(event, self.cfg_ana.muons)
         jets = getattr(event, self.cfg_ana.jets)
 
+        met = getattr(event, self.cfg_ana.met)
+        fillMet(self.tree, 'met', met)
+
         if len(electrons) > 0:
             fillLepton(self.tree, 'electrons', electrons[0])
 
