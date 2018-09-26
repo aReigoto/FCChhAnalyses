@@ -41,7 +41,7 @@ class SimpleTreeProducer(Analyzer):
     '''
 
     def __init__(self):
-        Analyzer.__init__(self)
+        super(SimpleTreeProducer, self).__init__()
         self.raw_vars_to_save = list()
         self.raw_vars_to_save.append({'particles_name': 'pfjets04', 'save_name': 'pfjets04_', 'max_number': 6})
 
