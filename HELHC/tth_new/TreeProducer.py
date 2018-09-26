@@ -118,7 +118,7 @@ class SimpleTreeProducer(Analyzer):
         muons = getattr(event, self.cfg_ana.muons)
         self.fill_particles_by_index(max_number=6, particles=muons, particle_name='muon_')
 
-        fill_particles_by_index2(max_number=6, particles_name='pfjets04')
+        self.fill_particles_by_index2(max_number=6, particles_name='pfjets04')
 
         # pfjets04 = getattr(event, self.cfg_ana.pfjets04)
         # self.fill_particles_by_index(max_number=6, particles=pfjets04, particle_name='pfjets04_')
