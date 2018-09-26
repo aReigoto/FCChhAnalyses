@@ -25,23 +25,62 @@ source = cfg.Analyzer(
     Reader,
 
     weights='mcEventWeights',
-
     gen_particles='skimmedGenParticles',
+    met='met',
+
     electrons='electrons',
     electronITags='electronITags',
     electronsToMC='electronsToMC',
+
     muons='muons',
     muonITags='muonITags',
     muonsToMC='muonsToMC',
-    jets='pfjets04',
-    bTags='pfbTags04',
-    photons='photons',
 
+    # main jets trk02
+    trkjets02='trkjets02',
+    trkbTags02='trkbTags02',
+
+    trkjetsOneSubJettiness02='trkjetsOneSubJettiness02',
+    trkjetsTwoSubJettiness02='trkjetsTwoSubJettiness02',
+    trkjetsThreeSubJettiness02='trkjetsThreeSubJettiness02',
+    trksubjetsSoftDropTagged02='trksubjetsSoftDropTagged02',
+    trksubjetsSoftDrop02='trksubjetsSoftDrop02',
+    #
+    trksubjetsSoftDropTagged04='trksubjetsSoftDropTagged04',
+    trksubjetsSoftDrop04='trksubjetsSoftDrop04',
+    trksubjetsSoftDropTagged08='trksubjetsSoftDropTagged08',
+    trksubjetsSoftDrop08='trksubjetsSoftDrop08',
+
+    # pf jets pf02 for correction
+    pfjets02='pfjets02',
+    pfbTags02='pfbTags02',
+
+    pfjetsOneSubJettiness02='pfjetsOneSubJettiness02',
+    pfjetsTwoSubJettiness02='pfjetsTwoSubJettiness02',
+    pfjetsThreeSubJettiness02='pfjetsThreeSubJettiness02',
+    pfsubjetsSoftDropTagged02='pfsubjetsSoftDropTagged02',
+    pfsubjetsSoftDrop02='pfsubjetsSoftDrop02',
+
+
+    # used for b-tagging
+    pfjets04='pfjets04',
+    pfbTags04='pfbTags04',
+    pfjetsFlavor04='pfjetsFlavor04',
+
+    # used for mreco
+    pfjets08='pfjets08',
+    pfbTags08='pfbTags08',
+
+    trkjets04='trkjets04',
+    trkjets08='trkjets08',
+
+    photons='photons',
     pfphotons='pfphotons',
+
     pfcharged='pfcharged',
     pfneutrals='pfneutrals',
 
-    met='met',
+
 
 )
 
@@ -76,26 +115,49 @@ tree = cfg.Analyzer(
     SimpleTreeProducer,
     tree_name='events',
     tree_title='A simple test tree',
-    # electrons='selected_electrons',
-    # muons='selected_muons'
 
+    # Raw Variables
+
+    weights='weights',
+    gen_particles='gen_particles',
+    met='met',
     electrons='electrons',
+    electronITags='electronITags',
+    electronsToMC='electronsToMC',
     muons='muons',
-    jets='jets',
+    muonITags='muonITags',
+    muonsToMC='muonsToMC',
+    trkjets02='trkjets02',
+    trkbTags02='trkbTags02',
+    trkjetsOneSubJettiness02='trkjetsOneSubJettiness02',
+    trkjetsTwoSubJettiness02='trkjetsTwoSubJettiness02',
+    trkjetsThreeSubJettiness02='trkjetsThreeSubJettiness02',
+    trksubjetsSoftDropTagged02='trksubjetsSoftDropTagged02',
+    trksubjetsSoftDrop02='trksubjetsSoftDrop02',
+    trksubjetsSoftDropTagged04='trksubjetsSoftDropTagged04',
+    trksubjetsSoftDrop04='trksubjetsSoftDrop04',
+    trksubjetsSoftDropTagged08='trksubjetsSoftDropTagged08',
+    trksubjetsSoftDrop08='trksubjetsSoftDrop08',
+    pfjets02='pfjets02',
+    pfbTags02='pfbTags02',
+    pfjetsOneSubJettiness02='pfjetsOneSubJettiness02',
+    pfjetsTwoSubJettiness02='pfjetsTwoSubJettiness02',
+    pfjetsThreeSubJettiness02='pfjetsThreeSubJettiness02',
+    pfsubjetsSoftDropTagged02='pfsubjetsSoftDropTagged02',
+    pfsubjetsSoftDrop02='pfsubjetsSoftDrop02',
+    pfjets04='pfjets04',
+    pfbTags04='pfbTags04',
+    pfjetsFlavor04='pfjetsFlavor04',
+    pfjets08='pfjets08',
+    pfbTags08='pfbTags08',
+    trkjets04='trkjets04',
+    trkjets08='trkjets08',
+    photons='photons',
+    pfphotons='pfphotons',
+    pfcharged='pfcharged',
+    pfneutrals='pfneutrals'
 
-    # weights='mcEventWeights',
-    # gen_particles='skimmedGenParticles',
-    # electronITags='electronITags',
-    # electronsToMC='electronsToMC',
-    # muonITags='muonITags',
-    # muonsToMC='muonsToMC',
-    # jets='pfjets04',
-    # bTags='pfbTags04',
-    # photons='photons',
-    # pfphotons='pfphotons',
-    # pfcharged='pfcharged',
-    # pfneutrals='pfneutrals',
-    met='met'
+
 )
 
 sequence = cfg.Sequence([

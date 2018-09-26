@@ -52,10 +52,25 @@ class SimpleTreeProducer(Analyzer):
         # from EventStore import EventStore as Events
         # EventStore
         self.tree.var('weights', float)
-        bookLepton(self.tree, 'electrons', pflow=False)
-        bookParticle(self.tree, 'muons')
-        bookParticle(self.tree, 'jets')
+        bookParticle(self.tree, 'electron0')
+        bookParticle(self.tree, 'electron1')
+        bookParticle(self.tree, 'electron2')
+
+        bookParticle(self.tree, 'muon0')
+        bookParticle(self.tree, 'muon1')
+        bookParticle(self.tree, 'muon2')
+
+        bookParticle(self.tree, 'jet0')
+        bookParticle(self.tree, 'jet1')
+        bookParticle(self.tree, 'jet2')
+
         bookMet(self.tree, 'met')
+
+    def fill_particles_by_index(max_number=None, particles=None, particle_name=None):
+        for index, particle in enumerate(particles):
+            if index == max_number:
+                break
+            fillParticle(self.tree, '{particle_name}{index}'.format(particle_name, index), particle)
 
     def process(self, event):
         '''Process the event.
@@ -69,22 +84,19 @@ class SimpleTreeProducer(Analyzer):
 
         '''
 
-        #weights = getattr(event, self.cfg_ana.weights)
-        electrons = getattr(event, self.cfg_ana.electrons)
-        muons = getattr(event, self.cfg_ana.muons)
-        jets = getattr(event, self.cfg_ana.jets)
+        # weights = getattr(event, self.cfg_ana.weights)
 
         met = getattr(event, self.cfg_ana.met)
         fillMet(self.tree, 'met', met)
 
-        if len(electrons) > 0:
-            fillLepton(self.tree, 'electrons', electrons[0])
+        electrons = getattr(event, self.cfg_ana.electrons)
+        fill_particles_by_index(max_number=3, particles=electrons, particle_name='electron')
 
-        if len(muons) > 0:
-            fillParticle(self.tree, 'muons', muons[0])
+        muons = getattr(event, self.cfg_ana.muons)
+        fill_particles_by_index(max_number=3, particles=muons, particle_name='muon')
 
-        if len(jets) > 0:
-            fillParticle(self.tree, 'jets', jets[0])
+        jets = getattr(event, self.cfg_ana.jets)
+        fill_particles_by_index(max_number=3, particles=jets, particle_name='jet')
 
         self.tree.tree.Fill()
 
