@@ -40,6 +40,11 @@ class SimpleTreeProducer(Analyzer):
 
     '''
 
+    def __init__(self):
+        Analyzer.__init__(self)
+        self.raw_vars_to_save = list()
+        self.raw_vars_to_save.append({'particles_name': 'pfjets04', 'save_name': 'pfjets04_', 'max_number': 6})
+
     def beginLoop(self, setup):
         super(SimpleTreeProducer, self).beginLoop(setup)
         self.rootfile = TFile('/'.join([self.dirName,
@@ -88,12 +93,12 @@ class SimpleTreeProducer(Analyzer):
                 break
             fillParticle(self.tree, '{}{}'.format(particle_name, index), particle)
 
-    def fill_particles_by_index2(self, event, max_number=None, particles_name=None):
+    def fill_particles_by_index2(self, event, max_number=None, particles_name=None, save_name=None):
         event_particles = getattr(event, eval('self.cfg_ana.{}'.format(particles_name)))
         for index, particle in enumerate(event_particles):
             if index == max_number:
                 break
-            fillParticle(self.tree, '{}_{}'.format(particles_name, index), particle)
+            fillParticle(self.tree, '{}{}'.format(save_name, index), particle)
 
     def process(self, event):
         '''Process the event.
@@ -118,7 +123,10 @@ class SimpleTreeProducer(Analyzer):
         muons = getattr(event, self.cfg_ana.muons)
         self.fill_particles_by_index(max_number=6, particles=muons, particle_name='muon_')
 
-        self.fill_particles_by_index2(event, max_number=6, particles_name='pfjets04')
+        max_number = self.raw_vars_to_save[0]['max_number']
+        particles_name = self.raw_vars_to_save[0]['particles_name']
+        save_name = self.raw_vars_to_save[0]['save_name']
+        self.fill_particles_by_index2(event, max_number=max_number, particles_name=particles_name, save_name=save_name)
 
         # pfjets04 = getattr(event, self.cfg_ana.pfjets04)
         # self.fill_particles_by_index(max_number=6, particles=pfjets04, particle_name='pfjets04_')
