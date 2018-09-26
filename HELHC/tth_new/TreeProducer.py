@@ -88,7 +88,7 @@ class SimpleTreeProducer(Analyzer):
                 break
             fillParticle(self.tree, '{}{}'.format(particle_name, index), particle)
 
-    def fill_particles_by_index2(self, max_number=None, particles_name=None):
+    def fill_particles_by_index2(self, event, max_number=None, particles_name=None):
         event_particles = getattr(event, eval('self.cfg_ana.{}'.format(particles_name)))
         for index, particle in enumerate(event_particles):
             if index == max_number:
@@ -118,7 +118,7 @@ class SimpleTreeProducer(Analyzer):
         muons = getattr(event, self.cfg_ana.muons)
         self.fill_particles_by_index(max_number=6, particles=muons, particle_name='muon_')
 
-        self.fill_particles_by_index2(max_number=6, particles_name='pfjets04')
+        self.fill_particles_by_index2(event, max_number=6, particles_name='pfjets04')
 
         # pfjets04 = getattr(event, self.cfg_ana.pfjets04)
         # self.fill_particles_by_index(max_number=6, particles=pfjets04, particle_name='pfjets04_')
