@@ -90,13 +90,13 @@ class SimpleTreeProducer(Analyzer):
         fillMet(self.tree, 'met', met)
 
         electrons = getattr(event, self.cfg_ana.electrons)
-        fill_particles_by_index(max_number=3, particles=electrons, particle_name='electron')
+        self.fill_particles_by_index(max_number=3, particles=electrons, particle_name='electron')
 
         muons = getattr(event, self.cfg_ana.muons)
-        fill_particles_by_index(max_number=3, particles=muons, particle_name='muon')
+        self.fill_particles_by_index(max_number=3, particles=muons, particle_name='muon')
 
         jets = getattr(event, self.cfg_ana.jets)
-        fill_particles_by_index(max_number=3, particles=jets, particle_name='jet')
+        self.fill_particles_by_index(max_number=3, particles=jets, particle_name='jet')
 
         self.tree.tree.Fill()
 
