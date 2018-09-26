@@ -52,19 +52,35 @@ class SimpleTreeProducer(Analyzer):
         # from EventStore import EventStore as Events
         # EventStore
         self.tree.var('weights', float)
-        bookParticle(self.tree, 'electron0')
-        bookParticle(self.tree, 'electron1')
-        bookParticle(self.tree, 'electron2')
-
-        bookParticle(self.tree, 'muon0')
-        bookParticle(self.tree, 'muon1')
-        bookParticle(self.tree, 'muon2')
-
-        bookParticle(self.tree, 'pfjets04_0')
-        bookParticle(self.tree, 'pfjets04_1')
-        bookParticle(self.tree, 'pfjets04_2')
 
         bookMet(self.tree, 'met')
+
+        for i in range(6):
+            bookParticle(self.tree, 'electron_{}'.format(i))
+        #bookParticle(self.tree, 'electron_0')
+        #bookParticle(self.tree, 'electron_1')
+        #bookParticle(self.tree, 'electron_2')
+        #bookParticle(self.tree, 'electron_3')
+        #bookParticle(self.tree, 'electron_4')
+        #bookParticle(self.tree, 'electron_5')
+
+        for i in range(6):
+            bookParticle(self.tree, 'muon_{}'.format(i))
+        #bookParticle(self.tree, 'muon_0')
+        #bookParticle(self.tree, 'muon_1')
+        #bookParticle(self.tree, 'muon_2')
+        #bookParticle(self.tree, 'muon_3')
+        #bookParticle(self.tree, 'muon_4')
+        #bookParticle(self.tree, 'muon_5')
+
+        for i in range(6):
+            bookParticle(self.tree, 'pfjets04_{}'.format(i))
+        #bookParticle(self.tree, 'pfjets04_0')
+        #bookParticle(self.tree, 'pfjets04_1')
+        #bookParticle(self.tree, 'pfjets04_2')
+        #bookParticle(self.tree, 'pfjets04_3')
+        #bookParticle(self.tree, 'pfjets04_4')
+        #bookParticle(self.tree, 'pfjets04_5')
 
     def fill_particles_by_index(self, max_number=None, particles=None, particle_name=None):
         for index, particle in enumerate(particles):
@@ -90,13 +106,13 @@ class SimpleTreeProducer(Analyzer):
         fillMet(self.tree, 'met', met)
 
         electrons = getattr(event, self.cfg_ana.electrons)
-        self.fill_particles_by_index(max_number=3, particles=electrons, particle_name='electron')
+        self.fill_particles_by_index(max_number=6, particles=electrons, particle_name='electron_')
 
         muons = getattr(event, self.cfg_ana.muons)
-        self.fill_particles_by_index(max_number=3, particles=muons, particle_name='muon')
+        self.fill_particles_by_index(max_number=6, particles=muons, particle_name='muon_')
 
         pfjets04 = getattr(event, self.cfg_ana.pfjets04)
-        self.fill_particles_by_index(max_number=3, particles=pfjets04, particle_name='pfjets04_')
+        self.fill_particles_by_index(max_number=6, particles=pfjets04, particle_name='pfjets04_')
 
         self.tree.tree.Fill()
 
