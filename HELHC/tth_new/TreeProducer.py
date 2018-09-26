@@ -60,9 +60,9 @@ class SimpleTreeProducer(Analyzer):
         bookParticle(self.tree, 'muon1')
         bookParticle(self.tree, 'muon2')
 
-        bookParticle(self.tree, 'jet0')
-        bookParticle(self.tree, 'jet1')
-        bookParticle(self.tree, 'jet2')
+        bookParticle(self.tree, 'pfjets04_0')
+        bookParticle(self.tree, 'pfjets04_1')
+        bookParticle(self.tree, 'pfjets04_2')
 
         bookMet(self.tree, 'met')
 
@@ -95,8 +95,8 @@ class SimpleTreeProducer(Analyzer):
         muons = getattr(event, self.cfg_ana.muons)
         self.fill_particles_by_index(max_number=3, particles=muons, particle_name='muon')
 
-        jets = getattr(event, self.cfg_ana.jets)
-        self.fill_particles_by_index(max_number=3, particles=jets, particle_name='jet')
+        pfjets04 = getattr(event, self.cfg_ana.pfjets04)
+        self.fill_particles_by_index(max_number=3, particles=pfjets04, particle_name='pfjets04_')
 
         self.tree.tree.Fill()
 
