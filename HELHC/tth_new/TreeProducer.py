@@ -70,7 +70,7 @@ class SimpleTreeProducer(Analyzer):
         for index, particle in enumerate(particles):
             if index == max_number:
                 break
-            fillParticle(self.tree, '{particle_name}{index}'.format(particle_name, index), particle)
+            fillParticle(self.tree, '{}{}'.format(particle_name, index), particle)
 
     def process(self, event):
         '''Process the event.
