@@ -66,7 +66,7 @@ class SimpleTreeProducer(Analyzer):
 
         bookMet(self.tree, 'met')
 
-    def fill_particles_by_index(max_number=None, particles=None, particle_name=None):
+    def fill_particles_by_index(self, max_number=None, particles=None, particle_name=None):
         for index, particle in enumerate(particles):
             if index == max_number:
                 break
