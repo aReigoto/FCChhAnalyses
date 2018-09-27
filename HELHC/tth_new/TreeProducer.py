@@ -19,25 +19,24 @@ class SimpleTreeProducer(Analyzer):
         self.raw_vars_to_save = list()
 
         self.raw_vars_to_save.append({'container_name': 'electrons',
-                                        'save_name': 'electrons_',
-                                        'max_number': 6})
+                                      'save_name': 'electrons_',
+                                      'max_number': 6})
 
         self.raw_vars_to_save.append({'container_name': 'muons',
-                                        'save_name': 'muons_',
-                                        'max_number': 6})
+                                      'save_name': 'muons_',
+                                      'max_number': 6})
 
         self.raw_vars_to_save.append({'container_name': 'pfjets04',
-                                        'save_name': 'pfjets04_',
-                                        'max_number': 6})
+                                      'save_name': 'pfjets04_',
+                                      'max_number': 6})
 
-        self.raw_vars_to_save.append({'container_name': 'pfbTags04',
-                                        'save_name': 'pfbTags04_',
-                                        'max_number': 6})
+        # self.raw_vars_to_save.append({'container_name': 'pfbTags04',
+        #                                 'save_name': 'pfbTags04_',
+        #                                 'max_number': 6})
 
         self.raw_vars_to_save.append({'container_name': 'pfjetsFlavor04',
-                                        'save_name': 'pfjetsFlavor04_',
-                                        'max_number': 6})
-
+                                      'save_name': 'pfjetsFlavor04_',
+                                      'max_number': 6})
 
         #self.tree.var('weights', float)
         bookMet(self.tree, 'met')
