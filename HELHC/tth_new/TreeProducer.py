@@ -40,11 +40,6 @@ class SimpleTreeProducer(Analyzer):
 
     '''
 
-    def __init__(self):
-        super(SimpleTreeProducer, self).__init__(*args, **kargs)
-        self.raw_vars_to_save = list()
-        self.raw_vars_to_save.append({'particles_name': 'pfjets04', 'save_name': 'pfjets04_', 'max_number': 6})
-
     def beginLoop(self, setup):
         super(SimpleTreeProducer, self).beginLoop(setup)
         self.rootfile = TFile('/'.join([self.dirName,
@@ -56,6 +51,10 @@ class SimpleTreeProducer(Analyzer):
         # Names of vars must be availebel from
         # from EventStore import EventStore as Events
         # EventStore
+
+        self.raw_vars_to_save = list()
+        self.raw_vars_to_save.append({'particles_name': 'pfjets04', 'save_name': 'pfjets04_', 'max_number': 6})
+
         self.tree.var('weights', float)
 
         bookMet(self.tree, 'met')
