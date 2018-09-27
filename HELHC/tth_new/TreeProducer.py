@@ -34,8 +34,8 @@ class SimpleTreeProducer(Analyzer):
         #                                 'save_name': 'pfbTags04_',
         #                                 'max_number': 6})
 
-        self.raw_vars_to_save.append({'container_name': 'pfjetsFlavor04',
-                                      'save_name': 'pfjetsFlavor04_',
+        self.raw_vars_to_save.append({'container_name': 'photons',
+                                      'save_name': 'photons_',
                                       'max_number': 6})
 
         #self.tree.var('weights', float)
