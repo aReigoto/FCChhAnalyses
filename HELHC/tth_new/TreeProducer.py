@@ -53,14 +53,22 @@ class SimpleTreeProducer(Analyzer):
         # EventStore
 
         self.raw_vars_to_save = list()
-        self.raw_vars_to_save.append({'particles_name': 'pfjets04', 'save_name': 'pfjets04_', 'max_number': 6})
+        self.raw_vars_to_save.append({'particles_name': 'electrons',    'save_name': 'electrons_',  'max_number': 6})
+        self.raw_vars_to_save.append({'particles_name': 'muons',        'save_name': 'muons_',      'max_number': 6})
+        self.raw_vars_to_save.append({'particles_name': 'pfjets04',     'save_name': 'pfjets04_',   'max_number': 6})
 
         self.tree.var('weights', float)
 
         bookMet(self.tree, 'met')
 
-        for i in range(6):
-            bookParticle(self.tree, 'electron_{}'.format(i))
+        for _i_ in self.raw_vars_to_save:
+            max_number      = _i_['max_number']
+            save_name       = _i_['save_name']
+            for index in range(max_number):
+                bookParticle(self.tree, '{}{}'.format(save_name, index))
+
+        #for i in range(6):
+        #    bookParticle(self.tree, 'electron_{}'.format(i))
         #bookParticle(self.tree, 'electron_0')
         #bookParticle(self.tree, 'electron_1')
         #bookParticle(self.tree, 'electron_2')
@@ -68,8 +76,8 @@ class SimpleTreeProducer(Analyzer):
         #bookParticle(self.tree, 'electron_4')
         #bookParticle(self.tree, 'electron_5')
 
-        for i in range(6):
-            bookParticle(self.tree, 'muon_{}'.format(i))
+        #for i in range(6):
+        #    bookParticle(self.tree, 'muon_{}'.format(i))
         #bookParticle(self.tree, 'muon_0')
         #bookParticle(self.tree, 'muon_1')
         #bookParticle(self.tree, 'muon_2')
@@ -77,8 +85,8 @@ class SimpleTreeProducer(Analyzer):
         #bookParticle(self.tree, 'muon_4')
         #bookParticle(self.tree, 'muon_5')
 
-        for i in range(6):
-            bookParticle(self.tree, 'pfjets04_{}'.format(i))
+        #for i in range(6):
+        #    bookParticle(self.tree, 'pfjets04_{}'.format(i))
         #bookParticle(self.tree, 'pfjets04_0')
         #bookParticle(self.tree, 'pfjets04_1')
         #bookParticle(self.tree, 'pfjets04_2')
@@ -116,16 +124,17 @@ class SimpleTreeProducer(Analyzer):
         met = getattr(event, self.cfg_ana.met)
         fillMet(self.tree, 'met', met)
 
-        electrons = getattr(event, self.cfg_ana.electrons)
-        self.fill_particles_by_index(max_number=6, particles=electrons, particle_name='electron_')
+        #electrons = getattr(event, self.cfg_ana.electrons)
+        #self.fill_particles_by_index(max_number=6, particles=electrons, particle_name='electron_')
 
-        muons = getattr(event, self.cfg_ana.muons)
-        self.fill_particles_by_index(max_number=6, particles=muons, particle_name='muon_')
+        #muons = getattr(event, self.cfg_ana.muons)
+        #self.fill_particles_by_index(max_number=6, particles=muons, particle_name='muon_')
 
-        max_number = self.raw_vars_to_save[0]['max_number']
-        particles_name = self.raw_vars_to_save[0]['particles_name']
-        save_name = self.raw_vars_to_save[0]['save_name']
-        self.fill_particles_by_index2(event, max_number=max_number, particles_name=particles_name, save_name=save_name)
+        for _i_ in self.raw_vars_to_save:
+            max_number = _i_['max_number']
+            particles_name = _i_['particles_name']
+            save_name = _i_['save_name']
+            self.fill_particles_by_index2(event, max_number=max_number, particles_name=particles_name, save_name=save_name)
 
         # pfjets04 = getattr(event, self.cfg_ana.pfjets04)
         # self.fill_particles_by_index(max_number=6, particles=pfjets04, particle_name='pfjets04_')
