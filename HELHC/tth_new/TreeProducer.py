@@ -39,7 +39,7 @@ class SimpleTreeProducer(Analyzer):
                                         'max_number': 6})
 
 
-        self.tree.var('weights', float)
+        #self.tree.var('weights', float)
         bookMet(self.tree, 'met')
 
         for container_i in self.raw_vars_to_save:
@@ -65,8 +65,8 @@ class SimpleTreeProducer(Analyzer):
 
     def process(self, event):
 
-        weights = getattr(event, self.cfg_ana.weights)
-        self.tree.fill('weights', weights)
+        #weights = getattr(event, self.cfg_ana.weights)
+        #self.tree.fill('weights', weights)
 
         met = getattr(event, self.cfg_ana.met)
         fillMet(self.tree, 'met', met)
