@@ -89,24 +89,18 @@ gSystem.Load("libdatamodelDict")
 from EventStore import EventStore as Events
 # FCChhAnalyses specific
 
-# select isolated muons with pT > 50 GeV and relIso < 0.4
-from heppy.analyzers.Selector import Selector
-selected_muons = cfg.Analyzer(
-    Selector,
-    'selected_muons',
-    output='selected_muons',
-    input_objects='muons',
-    filter_func=lambda ptc: ptc.pt() > 50 and ptc.iso.sumpt / ptc.pt() < 0.4
-)
 
-# select electrons with pT > 50 GeV and relIso < 0.4
-selected_electrons = cfg.Analyzer(
-    Selector,
-    'selected_electrons',
-    output='selected_electrons',
-    input_objects='electrons',
-    filter_func=lambda ptc: ptc.pt() > 50 and ptc.iso.sumpt / ptc.pt() < 0.4
-    #filter_func = lambda ptc: ptc.pt()>5
+# apply jet flavour tagging
+from heppy.FCChhAnalyses.analyzers.FlavourTagger import FlavourTagger
+pfjets04_pdg = cfg.Analyzer(
+    FlavourTagger,
+    'pfjets04_pdg',
+    input_jets='pfjets04',
+    input_genparticles='gen_particles',
+    output_jets='pfjets04_pdg',
+    dr_match=0.4,
+    pdg_tags=[5, 4, 0],
+    ptr_min=0.1,
 )
 
 
@@ -162,7 +156,7 @@ tree = cfg.Analyzer(
 
 sequence = cfg.Sequence([
     source,
-    # selected_muons,
+    pfjets04_pdg,
     # selected_electrons,
     tree
 ])

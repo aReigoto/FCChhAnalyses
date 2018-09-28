@@ -16,6 +16,8 @@ class SimpleTreeProducer(Analyzer):
                          self.cfg_ana.tree_title)
 
         # List of dict
+        # Note : AttributeError: 'Event' object has no attribute ( pfjetsFlavor04, pfbTags04, weights )
+        # from : getattr(event, self.cfg_ana.weights)
         self.raw_vars_to_save = list()
 
         self.raw_vars_to_save.append({'container_name': 'electrons',
@@ -26,17 +28,25 @@ class SimpleTreeProducer(Analyzer):
                                       'save_name': 'muons_',
                                       'max_number': 6})
 
+        self.raw_vars_to_save.append({'container_name': 'photons',
+                                      'save_name': 'photons_',
+                                      'max_number': 6})
+
+        self.raw_vars_to_save.append({'container_name': 'pfjets02',
+                                      'save_name': 'pfjets02_',
+                                      'max_number': 6})
+
         self.raw_vars_to_save.append({'container_name': 'pfjets04',
                                       'save_name': 'pfjets04_',
+                                      'max_number': 6})
+
+        self.raw_vars_to_save.append({'container_name': 'pfjets08',
+                                      'save_name': 'pfjets08_',
                                       'max_number': 6})
 
         # self.raw_vars_to_save.append({'container_name': 'pfbTags04',
         #                                 'save_name': 'pfbTags04_',
         #                                 'max_number': 6})
-
-        self.raw_vars_to_save.append({'container_name': 'photons',
-                                      'save_name': 'photons_',
-                                      'max_number': 6})
 
         #self.tree.var('weights', float)
         bookMet(self.tree, 'met')
